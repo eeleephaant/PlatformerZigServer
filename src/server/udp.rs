@@ -8,6 +8,7 @@ use crate::server::Server;
 pub struct UdpServer {
     socket: UdpSocket,
 }
+
 impl UdpServer {
     pub fn new(addr: &str) -> std::io::Result<Self> {
         let socket = UdpSocket::bind(addr)?;
@@ -22,9 +23,7 @@ impl Server for UdpServer {
         let mut buf = [0; 1024];
         loop {
             let (amt, src) = self.socket.recv_from(&mut buf)?;
-            let data = &mut buf[..amt];
-            data.reverse();
-            self.socket.send_to(data, &src)?;
+            let data = &buf[..amt];
         }
     }
 }
