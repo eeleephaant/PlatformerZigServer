@@ -1,4 +1,4 @@
-use crate::models::{game_state::GameState, player::Player};
+use crate::models::{game_state::GameState, player::{self, Player}};
 
 #[derive(Debug, Clone)]
 pub struct Lobby {
@@ -14,6 +14,7 @@ impl Lobby {
             id,
             players: Vec::new(),
             max_players,
+            game_state: GameState::InLobby,
         }
     }
     pub fn add_player(&mut self ,player: Player) -> bool {
@@ -27,6 +28,11 @@ impl Lobby {
         return self.players.len() >= self.max_players;
     }
     pub fn remove_player(&mut self, player: Player){
-        self.players.remove(player);
+        for p in 0..self.players.len() {
+            if self.players[p].id == player.id{
+                self.players.remove(p);
+                break;
+            }
+        }
     }
 }
