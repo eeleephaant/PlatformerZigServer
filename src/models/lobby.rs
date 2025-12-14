@@ -35,4 +35,17 @@ impl Lobby {
             }
         }
     }
+    pub fn start_game(&mut self){
+        self.game_state = GameState::InGame;
+    }
+    pub fn finish_game(&mut self){
+        self.game_state = GameState::InLobby;
+    }
+    pub fn change_max_players(&mut self, max_players: usize) -> bool{
+        if self.players.len() > max_players{
+            return false;
+        }
+        self.max_players = max_players;
+        return true;
+    }
 }

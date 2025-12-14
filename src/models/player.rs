@@ -13,4 +13,12 @@ impl Player {
             ready: false,
         }
     }
+    pub fn change_ready(&mut self){
+        if self.ready {
+            self.ready = false;
+        }
+        else {
+            self.ready = true;
+        }
+    }
 }
